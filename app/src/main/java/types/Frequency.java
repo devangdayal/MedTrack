@@ -1,4 +1,4 @@
-package Types;
+package types;
 
 public enum Frequency {
     Regular,
