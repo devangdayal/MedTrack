@@ -1,8 +1,8 @@
 package medtrack;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import types.Frequency;
@@ -10,14 +10,16 @@ import types.Frequency;
 public class Medicine {
     private String name;
     private float dose;
-    private List<Date> timings; // To accommodate multiple timings
+    private List<LocalDateTime> timings; // To accommoLocalDateTime multiple timings
     private Frequency frequency; // Options: "regular", "alternate", "unique"
     private int stockLevel;
     private boolean refillReminderStatus;
-    private Date lastTakenTime;
-    private Date lastReminderTime; // Additional field for tracking reminder frequency
+    private LocalDateTime lastTakenTime;
+    private LocalDateTime lastReminderTime; // Additional field for tracking reminder frequency
     private int refillThreshold; // Additional field for refill reminder logic
-    private List<Date> intakeHistory; // Additional field for tracking intake history
+    private List<LocalDateTime> intakeHistory; // Additional field for tracking intake history
+    private LocalDateTime expirationDate;
+    private String notes;
 
     public Medicine() {
         System.out.print("Medicine Started");
@@ -25,25 +27,32 @@ public class Medicine {
 
     public Medicine(String name,
             float dose,
-            List<Date> timings,
+            List<LocalDateTime> timings,
             Frequency frequency,
             int stockLevel,
             boolean refillReminderStatus,
-            Date lastTakenTime,
-            Date lastReminderTime,
-            int refillThreshold) {
+            LocalDateTime lastTakenTime,
+            LocalDateTime lastReminderTime,
+            int refillThreshold,
+            LocalDateTime expirationDate,
+            String notes) {
 
-                this.name = name;
-                this.dose = dose;
-                this.timings = timings;
-                this.frequency = frequency;
-                this.stockLevel = stockLevel;
-                this.refillReminderStatus = refillReminderStatus;
-                this.lastTakenTime = lastTakenTime;
-                this.lastReminderTime = lastReminderTime;
-                this.refillThreshold = refillThreshold;
+        this.name = name;
+        this.dose = dose;
+        this.timings = timings;
+        this.frequency = frequency;
+        this.stockLevel = stockLevel;
+        this.refillReminderStatus = refillReminderStatus;
+        this.lastTakenTime = lastTakenTime;
+        this.lastReminderTime = lastReminderTime;
+        this.refillThreshold = refillThreshold;
+        this.expirationDate = expirationDate;
+        this.notes = notes;
 
     }
+
+    // Getters
+    // Here all the getters method of the Medicine Class
 
     public String getName() {
         return name;
@@ -53,7 +62,7 @@ public class Medicine {
         return dose;
     }
 
-    public List<Date> getTimings() {
+    public List<LocalDateTime> getTimings() {
         return Collections.unmodifiableList(timings); // Prevent direct modification
     }
 
@@ -69,11 +78,11 @@ public class Medicine {
         return refillReminderStatus;
     }
 
-    public Date getLastTakenTime() {
+    public LocalDateTime getLastTakenTime() {
         return lastTakenTime;
     }
 
-    public Date getLastReminderTime() {
+    public LocalDateTime getLastReminderTime() {
         return lastReminderTime;
     }
 
@@ -81,11 +90,20 @@ public class Medicine {
         return refillThreshold;
     }
 
-    public List<Date> getIntakeHistory() {
+    public List<LocalDateTime> getIntakeHistory() {
         return Collections.unmodifiableList(intakeHistory);
     }
 
+    public LocalDateTime getExpirationDate() {
+        return expirationDate;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
     // Setters
+    // Here all the setters method of the Medicine Class
     public void setName(String name) {
         this.name = name;
     }
@@ -94,7 +112,7 @@ public class Medicine {
         this.dose = dose;
     }
 
-    public void setTimings(List<Date> timings) {
+    public void setTimings(List<LocalDateTime> timings) {
         this.timings = new ArrayList<>(timings); // Create a copy to avoid external modifications
     }
 
@@ -110,11 +128,11 @@ public class Medicine {
         this.refillReminderStatus = refillReminderStatus;
     }
 
-    public void setLastTakenTime(Date lastTakenTime) {
+    public void setLastTakenTime(LocalDateTime lastTakenTime) {
         this.lastTakenTime = lastTakenTime;
     }
 
-    public void setLastReminderTime(Date lastReminderTime) {
+    public void setLastReminderTime(LocalDateTime lastReminderTime) {
         this.lastReminderTime = lastReminderTime;
     }
 
@@ -122,10 +140,39 @@ public class Medicine {
         this.refillThreshold = refillThreshold;
     }
 
-    public void addIntakeHistory(Date intakeTime) {
-        intakeHistory.add(intakeTime);
+    public void addIntakeHistory(LocalDateTime intakeTime) {
+        this.intakeHistory.add(intakeTime);
     }
 
+    public void setExpirationDate(LocalDateTime expirationDate) {
+        this.expirationDate = expirationDate;
+    }
 
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    // Functional Method of the Medicine Class
+
+    // TODO:
+    // To estimate the next refill LocalDateTime based on stock level and usage
+    // patterns.
+    public LocalDateTime calculateRefillDate(LocalDateTime today) {
+
+        LocalDateTime refillDate = LocalDateTime.now();
+
+        return refillDate;
+
+    }
+
+    // TODO:
+    // To create a comprehensive report with intake history, reminders, and other
+    // relevant information.
+
+    // TODO:
+    // To export medication data in a CSV format for sharing or backup.
+
+    // TODO:
+    // Raise
 
 }
