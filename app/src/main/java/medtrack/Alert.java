@@ -3,12 +3,9 @@ package medtrack;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import types.AlertType;
 
 public class Alert {
-
-    public enum AlertType {
-        MISSED_DOSE, REFILL_REMINDER, STOCK_LEVEL_TRIGGER, EXPIRATION
-    }
 
     private final AlertType type;
     private final Medicine medicine;
