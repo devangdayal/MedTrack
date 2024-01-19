@@ -8,6 +8,7 @@ import java.util.List;
 import types.Frequency;
 
 public class Medicine {
+
     private String name;
     private float dose;
     private List<LocalDateTime> timings; // To accommoLocalDateTime multiple timings
@@ -104,6 +105,7 @@ public class Medicine {
 
     // Setters
     // Here all the setters method of the Medicine Class
+
     public void setName(String name) {
         this.name = name;
     }
@@ -159,9 +161,13 @@ public class Medicine {
     // patterns.
     public LocalDateTime calculateRefillDate(LocalDateTime today) {
 
-        LocalDateTime refillDate = LocalDateTime.now();
+        int remainingStock = stockLevel - refillThreshold;
+        float averageDailyUsage = this.frequency.calculateAverageDailyUsage(this.dose);
+        int daysUntilRefill = Math.max(0, (int) Math.ceil(remainingStock / averageDailyUsage));
 
-        return refillDate;
+        LocalDateTime refillTime = getNextScheduledIntakeTime(today);
+
+        return refillTime;
 
     }
 
@@ -173,6 +179,6 @@ public class Medicine {
     // To export medication data in a CSV format for sharing or backup.
 
     // TODO:
-    // Raise
+    // Calculate Average Daily Usage
 
 }
